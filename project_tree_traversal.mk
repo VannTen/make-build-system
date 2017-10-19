@@ -6,7 +6,7 @@
 #*   By: mgautier <mgautier@student.42.fr>          +#+  +:+       +#+        *#
 #*                                                +#+#+#+#+#+   +#+           *#
 #*   Created: 2017/10/19 15:46:20 by mgautier          #+#    #+#             *#
-#*   Updated: 2017/10/19 18:22:39 by mgautier         ###   ########.fr       *#
+#*   Updated: 2017/10/19 19:13:00 by mgautier         ###   ########.fr       *#
 #*                                                                            *#
 #* ************************************************************************** *#
 
@@ -14,6 +14,8 @@
 # for DIR
 include directory_local_variables.mk
 include Parse_one_dir.mk
+include Collect.mk
+include debug.mk
 
 define include_dir_infos
 include $1Srcs.mk
@@ -27,6 +29,10 @@ endef
 # It expect three arguments : first is the directory to be parsed,
 # second is the function to be applied before parsing the subtree, 
 # third is the function to be applied after parsing the subtree,
+# 1 : directory (=subtree)
+# 2 : function to be applied on $1 before subtree parsing
+# 3 : function to be applied on $1 after subtree parsing
+#
 define parse_the_graph
 
 $(eval $(call $2,$1))
@@ -48,5 +54,6 @@ $(info Stepping out of $1)
 endef
 
 $(eval $(call parse_the_graph,./,test,test_2))
+$(foreach dira,$(dir_list),$(eval $(call print_locals,$(dira))))
 
 all:

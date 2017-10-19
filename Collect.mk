@@ -6,7 +6,7 @@
 #*   By: mgautier <mgautier@student.42.fr>          +#+  +:+       +#+        *#
 #*                                                +#+#+#+#+#+   +#+           *#
 #*   Created: 2017/10/19 15:35:46 by mgautier          #+#    #+#             *#
-#*   Updated: 2017/10/19 18:05:25 by mgautier         ###   ########.fr       *#
+#*   Updated: 2017/10/19 18:50:35 by mgautier         ###   ########.fr       *#
 #*                                                                            *#
 #* ************************************************************************** *#
 
@@ -35,3 +35,13 @@ DEP_FILES :=
 DIR_LIST:=
 
 add_to = $($1):=$($1) $($2)
+
+# Global variable list
+
+global_variables_list :=\
+	DIR_LIST\
+	GENERATED_SUBDIRS
+
+define	collect_global_variables
+dir_list := $(dir_list) $1
+endef
