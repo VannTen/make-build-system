@@ -6,7 +6,7 @@
 #*   By: mgautier <mgautier@student.42.fr>          +#+  +:+       +#+        *#
 #*                                                +#+#+#+#+#+   +#+           *#
 #*   Created: 2017/10/19 15:46:20 by mgautier          #+#    #+#             *#
-#*   Updated: 2017/10/20 15:29:45 by mgautier         ###   ########.fr       *#
+#*   Updated: 2017/10/20 15:44:35 by mgautier         ###   ########.fr       *#
 #*                                                                            *#
 #* ************************************************************************** *#
 
@@ -17,6 +17,7 @@ include Parse_one_dir.mk
 include Collect.mk
 include debug.mk
 include target_rule.mk
+include object_rules.mk
 include target_recipes.mk
 include Config.mk
 include phony_rules_recipes.mk
@@ -61,6 +62,8 @@ endef
 SRC_TREE_ROOT ?= ./
 intermediate_target_prefix := lib
 intermediate_target_suffix := .a
+obj_suffix := .o
+src_suffix := .c
 $(eval $(call parse_the_graph,$(SRC_TREE_ROOT),test,test_2))
 #$(foreach dira,$(dir_list),$(eval $(call print_locals,$(dira))))
 
