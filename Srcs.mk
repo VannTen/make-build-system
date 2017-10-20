@@ -6,10 +6,12 @@
 #*   By: mgautier <mgautier@student.42.fr>          +#+  +:+       +#+        *#
 #*                                                +#+#+#+#+#+   +#+           *#
 #*   Created: 2017/10/19 16:26:40 by mgautier          #+#    #+#             *#
-#*   Updated: 2017/10/19 17:49:47 by mgautier         ###   ########.fr       *#
+#*   Updated: 2017/10/19 19:24:13 by mgautier         ###   ########.fr       *#
 #*                                                                            *#
 #* ************************************************************************** *#
 
 SUBDIRS := lib lib_2 test
 
 SRC := fre trui or
+
+TARGET := ttttttttt
