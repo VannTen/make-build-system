@@ -6,7 +6,7 @@
 #*   By: mgautier <mgautier@student.42.fr>          +#+  +:+       +#+        *#
 #*                                                +#+#+#+#+#+   +#+           *#
 #*   Created: 2017/10/19 15:46:20 by mgautier          #+#    #+#             *#
-#*   Updated: 2017/10/19 18:56:49 by mgautier         ###   ########.fr       *#
+#*   Updated: 2017/10/20 09:54:52 by mgautier         ###   ########.fr       *#
 #*                                                                            *#
 #* ************************************************************************** *#
 
@@ -21,9 +21,9 @@ $(eval $(call include_dir_infos,$1))
 
 $(eval $(call define_local_variables,$1))
 
-$(eval $(call define_target,$1))
+$(eval $(call define_target_rule,$1))
 
-$(eval $(call define_object,$1))
+$(eval $(call define_object_rule,$1))
 
 $(eval $(call collect_global_variables,$1))
 

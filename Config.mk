@@ -6,20 +6,21 @@
 #*   By: mgautier <mgautier@student.42.fr>          +#+  +:+       +#+        *#
 #*                                                +#+#+#+#+#+   +#+           *#
 #*   Created: 2017/10/19 15:26:46 by mgautier          #+#    #+#             *#
-#*   Updated: 2017/10/19 15:28:31 by mgautier         ###   ########.fr       *#
+#*   Updated: 2017/10/20 13:09:45 by mgautier         ###   ########.fr       *#
 #*                                                                            *#
 #* ************************************************************************** *#
 
 SHELL = /bin/bash
 DEBUGGER := lldb
 CC := gcc
-AR := ar
+AR := touch
+LD := touch
 MKDIR := mkdir
 RMDIR := rm -Rf
 SED := sed
 LN := ln -f
 TOUCH := touch
-RANLIB := ranlib
+RANLIB := touch
 
 FILE_CHAR_RANGE := a-z0-9._
 STANDARD = c99
@@ -34,10 +35,13 @@ OPTI_CFLAGS := -flto -Ofast
 OPTI_LDFLAGS := -flto
 PROFILE_FLAGS :=
 CFLAGS := $(CFLAGS) $(ERROR_FLAGS)
+ARFLAGS :=
 
 # Archive maintainer flags
-ARFLAGS = rc
-ifeq ($(SYSTEM),Linux)
-	ARFLAGS += -U
-endif
+#
+#ARFLAGS = rc
+#ifeq ($(SYSTEM),Linux)
+#	ARFLAGS += -U
+#endif
+
 

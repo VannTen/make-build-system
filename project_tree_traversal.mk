@@ -6,7 +6,7 @@
 #*   By: mgautier <mgautier@student.42.fr>          +#+  +:+       +#+        *#
 #*                                                +#+#+#+#+#+   +#+           *#
 #*   Created: 2017/10/19 15:46:20 by mgautier          #+#    #+#             *#
-#*   Updated: 2017/10/19 19:13:00 by mgautier         ###   ########.fr       *#
+#*   Updated: 2017/10/20 14:06:39 by mgautier         ###   ########.fr       *#
 #*                                                                            *#
 #* ************************************************************************** *#
 
@@ -16,6 +16,11 @@ include directory_local_variables.mk
 include Parse_one_dir.mk
 include Collect.mk
 include debug.mk
+include target_rule.mk
+include target_recipes.mk
+include Config.mk
+include phony_rules_recipes.mk
+include functions_tools.mk
 
 define include_dir_infos
 include $1Srcs.mk
@@ -32,13 +37,13 @@ endef
 # 1 : directory (=subtree)
 # 2 : function to be applied on $1 before subtree parsing
 # 3 : function to be applied on $1 after subtree parsing
-#
+
 define parse_the_graph
 
 $(eval $(call $2,$1))
 
 $(foreach subdir,\
-	$(LIBRARY) $(SUBDIRS$1),\
+	$(LIBRARY$1) $(SUBDIRS$1),\
 	$(eval $(call $0,$1$(subdir)/,$2,$3)))
 
 $(eval $(call $3,$1))
@@ -53,7 +58,18 @@ define test_2
 $(info Stepping out of $1)
 endef
 
+intermediate_target_prefix := lib
+intermediate_target_suffix := .a
 $(eval $(call parse_the_graph,./,test,test_2))
-$(foreach dira,$(dir_list),$(eval $(call print_locals,$(dira))))
+#$(foreach dira,$(dir_list),$(eval $(call print_locals,$(dira))))
 
-all:
+.DEFAULT_GOAL:=
+all: $(TARGET./)
+
+fclean:
+	$(QUIET) $(clean_targets)
+
+clean:
+	$(QUIET) $(clean_objects)
+
+.PHONY: all fclean
