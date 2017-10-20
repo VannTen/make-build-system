@@ -6,7 +6,7 @@
 #*   By: mgautier <mgautier@student.42.fr>          +#+  +:+       +#+        *#
 #*                                                +#+#+#+#+#+   +#+           *#
 #*   Created: 2017/10/19 15:46:20 by mgautier          #+#    #+#             *#
-#*   Updated: 2017/10/20 14:06:39 by mgautier         ###   ########.fr       *#
+#*   Updated: 2017/10/20 15:29:45 by mgautier         ###   ########.fr       *#
 #*                                                                            *#
 #* ************************************************************************** *#
 
@@ -58,13 +58,15 @@ define test_2
 $(info Stepping out of $1)
 endef
 
+SRC_TREE_ROOT ?= ./
 intermediate_target_prefix := lib
 intermediate_target_suffix := .a
-$(eval $(call parse_the_graph,./,test,test_2))
+$(eval $(call parse_the_graph,$(SRC_TREE_ROOT),test,test_2))
 #$(foreach dira,$(dir_list),$(eval $(call print_locals,$(dira))))
 
 .DEFAULT_GOAL:=
-all: $(TARGET./)
+
+all: $(TARGET$(SRC_TREE_ROOT))
 
 fclean:
 	$(QUIET) $(clean_targets)
