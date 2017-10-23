@@ -6,7 +6,7 @@
 #*   By: mgautier <mgautier@student.42.fr>          +#+  +:+       +#+        *#
 #*                                                +#+#+#+#+#+   +#+           *#
 #*   Created: 2017/10/19 15:46:20 by mgautier          #+#    #+#             *#
-#*   Updated: 2017/10/20 15:44:35 by mgautier         ###   ########.fr       *#
+#*   Updated: 2017/10/23 11:21:46 by                  ###   ########.fr       *#
 #*                                                                            *#
 #* ************************************************************************** *#
 
@@ -22,6 +22,7 @@ include target_recipes.mk
 include Config.mk
 include phony_rules_recipes.mk
 include functions_tools.mk
+include computed_local_var.mk
 
 define include_dir_infos
 include $1Srcs.mk

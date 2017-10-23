@@ -6,7 +6,7 @@
 #*   By: mgautier <mgautier@student.42.fr>          +#+  +:+       +#+        *#
 #*                                                +#+#+#+#+#+   +#+           *#
 #*   Created: 2017/10/19 17:13:09 by mgautier          #+#    #+#             *#
-#*   Updated: 2017/10/20 15:36:38 by mgautier         ###   ########.fr       *#
+#*   Updated: 2017/10/23 11:21:58 by                  ###   ########.fr       *#
 #*                                                                            *#
 #* ************************************************************************** *#
 
@@ -18,7 +18,6 @@ local_variables_list :=\
 	SRC\
 	SUBDIRS\
 	TARGET\
-	OBJ\
 	TEST
 
 # The function is intended to set the value of variable which are
