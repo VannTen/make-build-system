@@ -6,7 +6,7 @@
 #*   By:  <>                                        +#+  +:+       +#+        *#
 #*                                                +#+#+#+#+#+   +#+           *#
 #*   Created: 2017/10/23 10:58:39 by                   #+#    #+#             *#
-#*   Updated: 2017/10/23 11:21:24 by                  ###   ########.fr       *#
+#*   Updated: 2017/10/23 11:38:15 by                  ###   ########.fr       *#
 #*                                                                            *#
 #* ************************************************************************** *#
 
@@ -28,14 +28,17 @@ computed_local_var :=\
 # 7 : prefix dest (path)
 define compute_list
 
-$4$5 := $(patsubst $6%$2,$6%$3,$1$5)
+$(info $1 $2 $3 $4 $5 $6 $7)
+$4$5 := $(patsubst $6%$2,$7%$3,$($1$5))
 
 endef
 
 # 1 : directory name
 define compute_local_var
 
-$(call compute_list,SRC,.c,.o,OBJ,$(SRC_DIR$1),$(OBJ_DIR$1))
-$(call compute_list,SRC,.c,.dep,DEP,$(SRC_DIR$1),$(OBJ_DIR$1))
+$(info SRC of $1 = $(SRC$1))
+$(eval $(call compute_list,SRC,.c,.o,OBJ,$1,$(SRC_DIR$1),$(OBJ_DIR$1)))
+$(eval $(call compute_list,SRC,.c,.dep,DEP,$1,$(SRC_DIR$1),$(OBJ_DIR$1)))
+$(info OBJ of $1 = $(OBJ$1))
 
 endef
