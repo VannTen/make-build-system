@@ -6,7 +6,7 @@
 #*   By:  <>                                        +#+  +:+       +#+        *#
 #*                                                +#+#+#+#+#+   +#+           *#
 #*   Created: 2017/10/23 10:58:39 by                   #+#    #+#             *#
-#*   Updated: 2017/10/23 11:38:15 by                  ###   ########.fr       *#
+#*   Updated: 2017/10/24 11:24:52 by                  ###   ########.fr       *#
 #*                                                                            *#
 #* ************************************************************************** *#
 
@@ -14,6 +14,8 @@
 # Those functions are intended to compute variables which are obtained by some
 # operations on the local_variables list.
 # See directory_local_variables.mk
+
+full_path_var := SRC OBJ DEP
 
 computed_local_var :=\
 	OBJ\
@@ -33,12 +35,24 @@ $4$5 := $(patsubst $6%$2,$7%$3,$($1$5))
 
 endef
 
+# 1 : variable name to expand
+# 2 : directory name
+
+define compute_full_path
+
+$(info $1 $2 $($1$2))
+full_path_$1$2 := $(addprefix $2$($1_DIR$2)/,$($1$2))
+
+endef
+
+define function_dummy
+
+OBJ$1:= $(SRC$1:$(src_suffix)=$(obj_suffix))
+DEP$1:= $(SRC$1:$(src_suffix)=$(dep_suffix))
+endef
 # 1 : directory name
-define compute_local_var
+define compute_full_path_var
 
-$(info SRC of $1 = $(SRC$1))
-$(eval $(call compute_list,SRC,.c,.o,OBJ,$1,$(SRC_DIR$1),$(OBJ_DIR$1)))
-$(eval $(call compute_list,SRC,.c,.dep,DEP,$1,$(SRC_DIR$1),$(OBJ_DIR$1)))
-$(info OBJ of $1 = $(OBJ$1))
-
+$(eval $(call function_dummy,$1))
+$(foreach fp_var,$(full_path_var),$(call compute_full_path,$(fp_var),$1))
 endef

@@ -6,7 +6,7 @@
 #*   By: mgautier <mgautier@student.42.fr>          +#+  +:+       +#+        *#
 #*                                                +#+#+#+#+#+   +#+           *#
 #*   Created: 2017/10/19 15:46:20 by mgautier          #+#    #+#             *#
-#*   Updated: 2017/10/23 11:21:46 by                  ###   ########.fr       *#
+#*   Updated: 2017/10/24 09:44:33 by                  ###   ########.fr       *#
 #*                                                                            *#
 #* ************************************************************************** *#
 
@@ -60,7 +60,8 @@ define test_2
 $(info Stepping out of $1)
 endef
 
-SRC_TREE_ROOT ?= ./
+SRC_TREE_ROOT ?= .
+override SRC_TREE_ROOT := $(SRC_TREE_ROOT)/
 intermediate_target_prefix := lib
 intermediate_target_suffix := .a
 obj_suffix := .o
