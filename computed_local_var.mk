@@ -6,7 +6,7 @@
 #*   By:  <>                                        +#+  +:+       +#+        *#
 #*                                                +#+#+#+#+#+   +#+           *#
 #*   Created: 2017/10/23 10:58:39 by                   #+#    #+#             *#
-#*   Updated: 2017/10/24 11:24:52 by                  ###   ########.fr       *#
+#*   Updated: 2017/10/24 19:34:27 by                  ###   ########.fr       *#
 #*                                                                            *#
 #* ************************************************************************** *#
 
@@ -37,22 +37,13 @@ endef
 
 # 1 : variable name to expand
 # 2 : directory name
+# 3 : Identifier of the source variable (written by users)
 
 define compute_full_path
-
-$(info $1 $2 $($1$2))
-full_path_$1$2 := $(addprefix $2$($1_DIR$2)/,$($1$2))
-
+full_path_$1$2 := $(patsubst %$($3_suffix),$2$($1_DIR$2)/%$($1_suffix),$($3$2))
 endef
 
-define function_dummy
-
-OBJ$1:= $(SRC$1:$(src_suffix)=$(obj_suffix))
-DEP$1:= $(SRC$1:$(src_suffix)=$(dep_suffix))
-endef
 # 1 : directory name
 define compute_full_path_var
-
-$(eval $(call function_dummy,$1))
-$(foreach fp_var,$(full_path_var),$(call compute_full_path,$(fp_var),$1))
+$(foreach fp_var,$(full_path_var),$(eval $(call compute_full_path,$(fp_var),$1,SRC)))
 endef

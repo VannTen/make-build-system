@@ -6,7 +6,7 @@
 #*   By: mgautier <mgautier@student.42.fr>          +#+  +:+       +#+        *#
 #*                                                +#+#+#+#+#+   +#+           *#
 #*   Created: 2017/10/19 15:46:20 by mgautier          #+#    #+#             *#
-#*   Updated: 2017/10/24 09:44:33 by                  ###   ########.fr       *#
+#*   Updated: 2017/10/24 19:09:24 by                  ###   ########.fr       *#
 #*                                                                            *#
 #* ************************************************************************** *#
 
@@ -64,8 +64,8 @@ SRC_TREE_ROOT ?= .
 override SRC_TREE_ROOT := $(SRC_TREE_ROOT)/
 intermediate_target_prefix := lib
 intermediate_target_suffix := .a
-obj_suffix := .o
-src_suffix := .c
+OBJ_suffix := .o
+SRC_suffix := .c
 $(eval $(call parse_the_graph,$(SRC_TREE_ROOT),test,test_2))
 #$(foreach dira,$(dir_list),$(eval $(call print_locals,$(dira))))
 
