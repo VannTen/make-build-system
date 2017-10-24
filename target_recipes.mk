@@ -6,7 +6,7 @@
 #*   By: mgautier <mgautier@student.42.fr>          +#+  +:+       +#+        *#
 #*                                                +#+#+#+#+#+   +#+           *#
 #*   Created: 2017/10/20 11:29:13 by mgautier          #+#    #+#             *#
-#*   Updated: 2017/10/20 15:36:20 by mgautier         ###   ########.fr       *#
+#*   Updated: 2017/10/24 19:43:18 by                  ###   ########.fr       *#
 #*                                                                            *#
 #* ************************************************************************** *#
 
@@ -22,7 +22,7 @@ endef
 
 define link_exec
 $(if $(PRINT_INFO),$(info Linking $@ ...))
-$(LD) $(ldflags) $(LDFLAGS) $(LD_DEST_OPT) $@ $+
+$(LD) $(ldflags) $(LDFLAGS) $(LD_DEST_OPT) -o $@ $+
 endef
 
 define	object_from_source

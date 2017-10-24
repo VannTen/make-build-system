@@ -6,7 +6,7 @@
 #*   By: mgautier <mgautier@student.42.fr>          +#+  +:+       +#+        *#
 #*                                                +#+#+#+#+#+   +#+           *#
 #*   Created: 2017/10/19 15:46:20 by mgautier          #+#    #+#             *#
-#*   Updated: 2017/10/24 19:09:24 by                  ###   ########.fr       *#
+#*   Updated: 2017/10/24 19:50:06 by                  ###   ########.fr       *#
 #*                                                                            *#
 #* ************************************************************************** *#
 
@@ -71,7 +71,7 @@ $(eval $(call parse_the_graph,$(SRC_TREE_ROOT),test,test_2))
 
 .DEFAULT_GOAL:=
 
-all: $(TARGET$(SRC_TREE_ROOT))
+all: $(target$(SRC_TREE_ROOT))
 
 fclean:
 	$(QUIET) $(clean_targets)

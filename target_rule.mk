@@ -6,7 +6,7 @@
 #*   By: mgautier <mgautier@student.42.fr>          +#+  +:+       +#+        *#
 #*                                                +#+#+#+#+#+   +#+           *#
 #*   Created: 2017/10/19 19:15:27 by mgautier          #+#    #+#             *#
-#*   Updated: 2017/10/20 15:47:46 by mgautier         ###   ########.fr       *#
+#*   Updated: 2017/10/24 19:53:37 by                  ###   ########.fr       *#
 #*                                                                            *#
 #* ************************************************************************** *#
 
@@ -23,9 +23,9 @@ define define_target_rule
 
 $(if $(TARGET$1),,$(warning No target for $1))
 
-$(call intermediate_target,$1):$(addprefix $1$(OBJ_DIR$1),$(OBJ$1))
+$(intermediate_target$1):$(full_path_OBJ$1)
 	$(QUIET) $$(static_lib)
 
-$(TARGET$1): $(call intermediate_target,$1) $(DEPS$1)
+$(target$1): $(intermediate_target$1) $(DEPS$1)
 	$(QUIET) $$(link_exec)
 endef
