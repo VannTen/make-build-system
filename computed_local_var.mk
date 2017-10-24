@@ -6,7 +6,7 @@
 #*   By:  <>                                        +#+  +:+       +#+        *#
 #*                                                +#+#+#+#+#+   +#+           *#
 #*   Created: 2017/10/23 10:58:39 by                   #+#    #+#             *#
-#*   Updated: 2017/10/24 19:58:45 by                  ###   ########.fr       *#
+#*   Updated: 2017/10/24 20:01:14 by                  ###   ########.fr       *#
 #*                                                                            *#
 #* ************************************************************************** *#
 
@@ -46,6 +46,6 @@ endef
 # 1 : directory name
 define compute_full_path_var
 $(foreach fp_var,$(full_path_var),$(eval $(call compute_full_path,$(fp_var),$1,SRC)))
-target$1:= $1/$(TARGET$1)
-intermediate_target$1:= $1/$(intermediate_target_prefix)$(TARGET$1)$(intermediate_target_suffix)
+target$1:= $1$(TARGET$1)
+intermediate_target$1:= $1$(intermediate_target_prefix)$(TARGET$1)$(intermediate_target_suffix)
 endef
