@@ -6,7 +6,7 @@
 #*   By: mgautier <mgautier@student.42.fr>          +#+  +:+       +#+        *#
 #*                                                +#+#+#+#+#+   +#+           *#
 #*   Created: 2017/10/19 17:13:09 by mgautier          #+#    #+#             *#
-#*   Updated: 2017/10/23 11:44:41 by                  ###   ########.fr       *#
+#*   Updated: 2017/10/25 08:53:57 by                  ###   ########.fr       *#
 #*                                                                            *#
 #* ************************************************************************** *#
 
@@ -18,6 +18,7 @@ local_variables_list :=\
 	SRC\
 	OBJ_DIR\
 	SRC_DIR\
+	INC_DIR\
 	SUBDIRS\
 	TARGET\
 	TEST

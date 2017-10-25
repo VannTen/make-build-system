@@ -6,7 +6,7 @@
 #*   By: mgautier <mgautier@student.42.fr>          +#+  +:+       +#+        *#
 #*                                                +#+#+#+#+#+   +#+           *#
 #*   Created: 2017/10/20 10:32:39 by mgautier          #+#    #+#             *#
-#*   Updated: 2017/10/24 20:02:18 by                  ###   ########.fr       *#
+#*   Updated: 2017/10/25 09:25:55 by                  ###   ########.fr       *#
 #*                                                                            *#
 #* ************************************************************************** *#
 
@@ -17,7 +17,8 @@
 
 define	define_object_rule
 
-$(full_path_OBJ$1): $1$(OBJ_DIR$1)/%$(OBJ_suffix): $1$(SRC_DIR$1)/%$(SRC_suffix)
+$(full_path_OBJ$1): $(obj_dir$1)/%$(OBJ_suffix): $(src_dir$1)/%$(SRC_suffix)\
+	| $(obj_dir$1)
 	$(QUIET) $$(object_from_source)
 
 endef

@@ -6,7 +6,7 @@
 #*   By: mgautier <mgautier@student.42.fr>          +#+  +:+       +#+        *#
 #*                                                +#+#+#+#+#+   +#+           *#
 #*   Created: 2017/10/19 19:15:27 by mgautier          #+#    #+#             *#
-#*   Updated: 2017/10/24 20:01:47 by                  ###   ########.fr       *#
+#*   Updated: 2017/10/25 08:52:35 by                  ###   ########.fr       *#
 #*                                                                            *#
 #* ************************************************************************** *#
 
@@ -23,6 +23,8 @@ $(if $(TARGET$1),,$(warning No target for $1))
 
 $(intermediate_target$1):$(full_path_OBJ$1)
 	$(QUIET) $$(static_lib)
+
+$(intermediate_target$1): cppflags := $(cppflags)
 
 $(target$1): $(intermediate_target$1) $(DEPS$1)
 	$(QUIET) $$(link_exec)

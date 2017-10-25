@@ -6,7 +6,7 @@
 #*   By: mgautier <mgautier@student.42.fr>          +#+  +:+       +#+        *#
 #*                                                +#+#+#+#+#+   +#+           *#
 #*   Created: 2017/10/19 15:46:20 by mgautier          #+#    #+#             *#
-#*   Updated: 2017/10/24 19:50:06 by                  ###   ########.fr       *#
+#*   Updated: 2017/10/25 09:42:50 by                  ###   ########.fr       *#
 #*                                                                            *#
 #* ************************************************************************** *#
 
@@ -23,6 +23,7 @@ include Config.mk
 include phony_rules_recipes.mk
 include functions_tools.mk
 include computed_local_var.mk
+include global_rules.mk
 
 define include_dir_infos
 include $1Srcs.mk
@@ -68,6 +69,8 @@ OBJ_suffix := .o
 SRC_suffix := .c
 $(eval $(call parse_the_graph,$(SRC_TREE_ROOT),test,test_2))
 #$(foreach dira,$(dir_list),$(eval $(call print_locals,$(dira))))
+
+$(eval $(call global_rules,$(SRC_TREE_ROOT)))
 
 .DEFAULT_GOAL:=
 

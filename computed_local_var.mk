@@ -6,7 +6,7 @@
 #*   By:  <>                                        +#+  +:+       +#+        *#
 #*                                                +#+#+#+#+#+   +#+           *#
 #*   Created: 2017/10/23 10:58:39 by                   #+#    #+#             *#
-#*   Updated: 2017/10/24 20:01:14 by                  ###   ########.fr       *#
+#*   Updated: 2017/10/25 09:25:50 by                  ###   ########.fr       *#
 #*                                                                            *#
 #* ************************************************************************** *#
 
@@ -20,6 +20,7 @@ full_path_var := SRC OBJ DEP
 computed_local_var :=\
 	OBJ\
 	DEP
+
 
 # 1 : source list identifier
 # 2 : suffix source
@@ -48,4 +49,7 @@ define compute_full_path_var
 $(foreach fp_var,$(full_path_var),$(eval $(call compute_full_path,$(fp_var),$1,SRC)))
 target$1:= $1$(TARGET$1)
 intermediate_target$1:= $1$(intermediate_target_prefix)$(TARGET$1)$(intermediate_target_suffix)
+obj_dir$1:= $1$(OBJ_DIR$1)
+dep_dir$1:= $1$(DEP_DIR$1)
+src_dir$1:= $1$(SRC_DIR$1)
 endef
