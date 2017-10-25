@@ -6,15 +6,15 @@
 #*   By: mgautier <mgautier@student.42.fr>          +#+  +:+       +#+        *#
 #*                                                +#+#+#+#+#+   +#+           *#
 #*   Created: 2017/10/20 13:19:12 by mgautier          #+#    #+#             *#
-#*   Updated: 2017/10/20 14:07:13 by mgautier         ###   ########.fr       *#
+#*   Updated: 2017/10/25 10:18:27 by                  ###   ########.fr       *#
 #*                                                                            *#
 #* ************************************************************************** *#
 
 define	clean_targets
-$(RM) $(all_of_TARGET)
-$(RM) $(foreach dir,$(dir_list), $(call intermediate_target,$(dir)))
+$(RM) $(call all_of_subtree,$(SRC_TREE_ROOT),target)
+$(RM) $(call all_of_subtree,$(SRC_TREE_ROOT),intermediate_target)
 endef
 
 define clean_objects
-$(RM) $(foreach dir,$(dir_list), $(OBJ$(dir)))
+$(RM) $(call all_of_subtree,$(SRC_TREE_ROOT),full_path_OBJ)
 endef
