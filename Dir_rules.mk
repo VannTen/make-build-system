@@ -6,7 +6,7 @@
 #*   By: mgautier <mgautier@student.42.fr>          +#+  +:+       +#+        *#
 #*                                                +#+#+#+#+#+   +#+           *#
 #*   Created: 2017/10/31 12:38:29 by mgautier          #+#    #+#             *#
-#*   Updated: 2017/10/31 13:02:16 by mgautier         ###   ########.fr       *#
+#*   Updated: 2017/10/31 15:01:14 by mgautier         ###   ########.fr       *#
 #*                                                                            *#
 #* ************************************************************************** *#
 
@@ -32,14 +32,31 @@ src_dir = $1$(SRC_DIR$1)
 
  
 define Dir_rules
+$(call $(if $(findstring lib,$(TARGET$1)),Lib_rule,Exe_rule),$1)
+endef
 
+define Exe_rule
 $(target):$(intermediate_target) $(ext_dependencies)
 	$(LINK_EXE)
 
 $(intermediate_target):$(objects)
-	$(ARCHIVE_LIB)
+	$(LINK_LIB)
 
 $(intermediate_target): include := $(compile_time_include)
+
+$(objects): $(obj_dir)%$(obj_suffix):$(src_dir)%$(src_suffix) | $(obj_dir)
+	$(COMPILE)
+
+endef
+
+define Lib_rule
+$(target).so $(target).a: $(objects)
+	$(LINK_LIB)
+
+$(target).so $(target).a: include := $(compile_time_include)
+
+$(target).so: cflags := $(cflags) $(shared_lib_compile_flags) 
+$(target).a: cflags := $(cflags) $(static_lib_compile_flags) 
 
 $(objects): $(obj_dir)%$(obj_suffix):$(src_dir)%$(src_suffix) | $(obj_dir)
 	$(COMPILE)
