@@ -6,7 +6,7 @@
 #*   By: mgautier <mgautier@student.42.fr>          +#+  +:+       +#+        *#
 #*                                                +#+#+#+#+#+   +#+           *#
 #*   Created: 2017/10/31 15:04:08 by mgautier          #+#    #+#             *#
-#*   Updated: 2017/10/31 16:02:12 by mgautier         ###   ########.fr       *#
+#*   Updated: 2017/10/31 16:08:29 by mgautier         ###   ########.fr       *#
 #*                                                                            *#
 #* ************************************************************************** *#
 
@@ -36,6 +36,7 @@ re: fclean all ## Redo a clean build (unsafe with --jobs)
 # Isn't it ?
 
 .PHONY: $(standard_targets)
+.DEFAULT_GOAL := all
 
 ## Help target, print informations about each standard target
 ##  (credit for that shell command goes to Brikou Carre)
