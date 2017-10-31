@@ -6,7 +6,7 @@
 #*   By: mgautier <mgautier@student.42.fr>          +#+  +:+       +#+        *#
 #*                                                +#+#+#+#+#+   +#+           *#
 #*   Created: 2017/10/31 12:38:36 by mgautier          #+#    #+#             *#
-#*   Updated: 2017/10/31 13:03:21 by mgautier         ###   ########.fr       *#
+#*   Updated: 2017/10/31 16:31:01 by mgautier         ###   ########.fr       *#
 #*                                                                            *#
 #* ************************************************************************** *#
 
@@ -32,7 +32,7 @@ define define_local_variables
 
 include $1Srcs.mk
 $(foreach local_var,$(local_variables_list),\
-	$(eval $(call assign_local,$1,$(local_var))))
+	$(call assign_local,$1,$(local_var)))
 endef
 
 
