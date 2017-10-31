@@ -6,7 +6,7 @@
 #*   By: mgautier <mgautier@student.42.fr>          +#+  +:+       +#+        *#
 #*                                                +#+#+#+#+#+   +#+           *#
 #*   Created: 2017/10/19 15:26:46 by mgautier          #+#    #+#             *#
-#*   Updated: 2017/10/25 09:01:25 by                  ###   ########.fr       *#
+#*   Updated: 2017/10/31 17:57:56 by mgautier         ###   ########.fr       *#
 #*                                                                            *#
 #* ************************************************************************** *#
 
@@ -44,7 +44,7 @@ ARFLAGS :=
 # shall be used as a target speficic variable for intermediate target, to apply
 # for each of its prerequisites object files
 cppflags = $(include)
-include =  $(foreach INC_DIR,$(INC_DIR$1) $(SUBDIRS$1),-iquote$1$(INC_DIR))
+compile_time_include = $(foreach INC_DIR,$(INC_DIR$1) $(SUBDIRS$1),-iquote$1$(INC_DIR))
 # Archive maintainer flags
 #
 ARFLAGS = rc
@@ -53,3 +53,7 @@ ifeq ($(SYSTEM),Linux)
 endif
 
 
+# Language settings
+#
+obj_suffix := .o
+src_suffix := .c

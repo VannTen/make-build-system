@@ -6,7 +6,7 @@
 #*   By: mgautier <mgautier@student.42.fr>          +#+  +:+       +#+        *#
 #*                                                +#+#+#+#+#+   +#+           *#
 #*   Created: 2017/10/31 12:38:36 by mgautier          #+#    #+#             *#
-#*   Updated: 2017/10/31 16:31:01 by mgautier         ###   ########.fr       *#
+#*   Updated: 2017/10/31 18:07:07 by mgautier         ###   ########.fr       *#
 #*                                                                            *#
 #* ************************************************************************** *#
 
@@ -29,7 +29,6 @@ local_variables_list :=\
 # It expect one argument, the name of the directory
 #
 define define_local_variables
-
 include $1Srcs.mk
 $(foreach local_var,$(local_variables_list),\
 	$(call assign_local,$1,$(local_var)))
@@ -47,6 +46,8 @@ endef
 # 
 
 define assign_local
-$2$1 := $($2)
+
+$2$1 := $$($2)
 $2 := $(NULL)
+
 endef
