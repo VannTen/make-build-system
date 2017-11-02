@@ -6,7 +6,7 @@
 #*   By: mgautier <mgautier@student.42.fr>          +#+  +:+       +#+        *#
 #*                                                +#+#+#+#+#+   +#+           *#
 #*   Created: 2017/10/31 12:38:29 by mgautier          #+#    #+#             *#
-#*   Updated: 2017/11/02 13:53:07 by mgautier         ###   ########.fr       *#
+#*   Updated: 2017/11/02 14:44:55 by mgautier         ###   ########.fr       *#
 #*                                                                            *#
 #* ************************************************************************** *#
 
@@ -26,8 +26,9 @@ ext_dependencies = $(intermediate_target) $(foreach sub,$(SUBDIRS$1),\
 all_includes = $(INC_DIR$1) $(foreach sub,$(SUBDIRS$1),\
 				   $(call all_includes,sub))
 compile_time_include = $(foreach inc_dir, $(all_includes), -iquote$(inc_dir))
+
 objects = $(patsubst %$(src_suffix),$(obj_dir)/%$(obj_suffix),$(SRC$1))
-obj_dir = $1$(OBJ_DIR$1)
+obj_dir = $1$2$(OBJ_DIR$1)
 src_dir = $1$(SRC_DIR$1)
 
 # Variable compilers flags
@@ -74,18 +75,12 @@ endef
 
 # Rule to make libs. The variable $(TARGET$1) must be modified to allow the
 # standard target all to work correctly.
+#
+
+include Lib_rules.mk
 define Lib_rule
-$(target).so $(target).a: $(objects)
-	$$(LINK_LIB)
-
-TARGET$1 := $1$(TARGET$1).so
-
-$(target).so $(target).a: include := $(compile_time_include)
-
-$(target).so: cflags := $(cflags) $(shared_lib_compile_flags) 
-$(target).a: cflags := $(cflags) $(static_lib_compile_flags) 
-
-$(objects): $(obj_dir)/%$(obj_suffix):$(src_dir)/%$(src_suffix) | $(obj_dir)
-	$$(COMPILE)
+$(info Lib)
+$(call Lib_rule_specific,$1,$(shared_lib_suffix))
+$(call Lib_rule_specific,$1,$(static_lib_suffix))
 
 endef

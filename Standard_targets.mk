@@ -6,7 +6,7 @@
 #*   By: mgautier <mgautier@student.42.fr>          +#+  +:+       +#+        *#
 #*                                                +#+#+#+#+#+   +#+           *#
 #*   Created: 2017/10/31 15:04:08 by mgautier          #+#    #+#             *#
-#*   Updated: 2017/10/31 16:08:29 by mgautier         ###   ########.fr       *#
+#*   Updated: 2017/11/02 14:56:02 by mgautier         ###   ########.fr       *#
 #*                                                                            *#
 #* ************************************************************************** *#
 
@@ -16,7 +16,7 @@
 
 standard_targets := all clean fclean re
 
-all: $(TARGET$(srcdir)) ## Build the default target for that directory
+all: $(call target,$(srcdir)) ## Build the default target for that directory
 
 clean: ## Clean object files
 	$(QUIET) $(clean_objects)

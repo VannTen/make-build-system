@@ -6,7 +6,7 @@
 #*   By: mgautier <mgautier@student.42.fr>          +#+  +:+       +#+        *#
 #*                                                +#+#+#+#+#+   +#+           *#
 #*   Created: 2017/10/19 15:26:46 by mgautier          #+#    #+#             *#
-#*   Updated: 2017/11/02 13:52:09 by mgautier         ###   ########.fr       *#
+#*   Updated: 2017/11/02 14:54:10 by mgautier         ###   ########.fr       *#
 #*                                                                            *#
 #* ************************************************************************** *#
 
@@ -51,3 +51,6 @@ endif
 #
 obj_suffix := .o
 src_suffix := .c
+shared_lib_suffix := so
+static_lib_suffix := a
+shared_lib_compile_flags := -fpic
