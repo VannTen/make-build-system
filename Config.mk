@@ -6,7 +6,7 @@
 #*   By: mgautier <mgautier@student.42.fr>          +#+  +:+       +#+        *#
 #*                                                +#+#+#+#+#+   +#+           *#
 #*   Created: 2017/10/19 15:26:46 by mgautier          #+#    #+#             *#
-#*   Updated: 2017/11/02 11:32:00 by mgautier         ###   ########.fr       *#
+#*   Updated: 2017/11/02 13:52:09 by mgautier         ###   ########.fr       *#
 #*                                                                            *#
 #* ************************************************************************** *#
 
@@ -35,22 +35,16 @@ OPTI_CFLAGS := -flto -Ofast
 OPTI_LDFLAGS := -flto
 PROFILE_FLAGS :=
 CFLAGS := $(CFLAGS) $(ERROR_FLAGS)
-ARFLAGS :=
-
-# Variable compilers flags
-# Those flags are in fact macro those effective value will depend on the place
-# where they are used. 
-
-# shall be used as a target speficic variable for intermediate target, to apply
-# for each of its prerequisites object files
-cppflags = $(include)
-compile_time_include = $(foreach INC_DIR,$(INC_DIR$1) $(SUBDIRS$1),-iquote$1$(INC_DIR))
-# Archive maintainer flags
-#
 ARFLAGS = rc
+
+# OS dependendant flags 
 ifeq ($(SYSTEM),Linux)
 	ARFLAGS += -U
+shared_flag := -shared
+else
+	shared_flag := -dynamiclib
 endif
+
 
 
 # Language settings

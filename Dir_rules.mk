@@ -6,7 +6,7 @@
 #*   By: mgautier <mgautier@student.42.fr>          +#+  +:+       +#+        *#
 #*                                                +#+#+#+#+#+   +#+           *#
 #*   Created: 2017/10/31 12:38:29 by mgautier          #+#    #+#             *#
-#*   Updated: 2017/11/02 11:33:34 by mgautier         ###   ########.fr       *#
+#*   Updated: 2017/11/02 13:53:07 by mgautier         ###   ########.fr       *#
 #*                                                                            *#
 #* ************************************************************************** *#
 
@@ -30,6 +30,28 @@ objects = $(patsubst %$(src_suffix),$(obj_dir)/%$(obj_suffix),$(SRC$1))
 obj_dir = $1$(OBJ_DIR$1)
 src_dir = $1$(SRC_DIR$1)
 
+# Variable compilers flags
+# Those flags are in fact macro those effective value will depend on the place
+# where they are used. 
+
+# shall be used as a target speficic variable for intermediate target, to apply
+# for each of its prerequisites object files
+cppflags = $(include)
+compile_time_include = \
+   $(foreach INC_DIR,$(INC_DIR$1) $(SUBDIRS$1),-iquote$1$(INC_DIR))
+
+# Recipes used in the rules below
+
+# Compilation
+
+COMPILE = $(CC) $(cflags) $(cppflags) $(CFLAGS) $(CPPFLAGS) -c -o $@ $<
+
+# Link
+
+LINK_LIB = $(if $(findstring a,$(suffix $@)),\
+		   $(LINK_STATIC_LIB),$(LINK_DYNAMIC_LIB))
+LINK_STATIC_LIB = $(AR) $(ARFLAGS) $@ $?
+LINK_DYNAMIC_LIB = $(CC) $(LDFLAGS) $(shared_flag) -o $@ $^
  
 define Dir_rules
 $(call $(if $(findstring lib,$(TARGET$1)),Lib_rule,Exe_rule),$1)
@@ -54,9 +76,9 @@ endef
 # standard target all to work correctly.
 define Lib_rule
 $(target).so $(target).a: $(objects)
-	$(LINK_LIB)
+	$$(LINK_LIB)
 
-TARGET$1 := $1$(TARGET$1).a
+TARGET$1 := $1$(TARGET$1).so
 
 $(target).so $(target).a: include := $(compile_time_include)
 
@@ -64,6 +86,6 @@ $(target).so: cflags := $(cflags) $(shared_lib_compile_flags)
 $(target).a: cflags := $(cflags) $(static_lib_compile_flags) 
 
 $(objects): $(obj_dir)/%$(obj_suffix):$(src_dir)/%$(src_suffix) | $(obj_dir)
-	$(COMPILE)
+	$$(COMPILE)
 
 endef
