@@ -6,7 +6,7 @@
 #*   By: mgautier <mgautier@student.42.fr>          +#+  +:+       +#+        *#
 #*                                                +#+#+#+#+#+   +#+           *#
 #*   Created: 2017/10/19 15:26:46 by mgautier          #+#    #+#             *#
-#*   Updated: 2017/10/31 17:57:56 by mgautier         ###   ########.fr       *#
+#*   Updated: 2017/11/02 11:32:00 by mgautier         ###   ########.fr       *#
 #*                                                                            *#
 #* ************************************************************************** *#
 
@@ -16,7 +16,7 @@ CC := gcc
 AR := ar
 LD := ld
 MKDIR := mkdir
-RMDIR := rm -Rf
+RMDIR := rmdir
 SED := sed
 LN := ln -f
 TOUCH := touch
