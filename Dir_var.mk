@@ -6,7 +6,7 @@
 #*   By: mgautier <mgautier@student.42.fr>          +#+  +:+       +#+        *#
 #*                                                +#+#+#+#+#+   +#+           *#
 #*   Created: 2017/10/31 12:38:36 by mgautier          #+#    #+#             *#
-#*   Updated: 2017/10/31 18:07:07 by mgautier         ###   ########.fr       *#
+#*   Updated: 2017/11/02 14:15:47 by mgautier         ###   ########.fr       *#
 #*                                                                            *#
 #* ************************************************************************** *#
 
@@ -19,7 +19,8 @@ local_variables_list :=\
 	OBJ_DIR\
 	SRC_DIR\
 	INC_DIR\
-	SUBDIRS\
+	COMPONENTS\
+	LIBRARIES\
 	TARGET
 
 # The function is intended to set the value of variable which are
@@ -32,6 +33,7 @@ define define_local_variables
 include $1Srcs.mk
 $(foreach local_var,$(local_variables_list),\
 	$(call assign_local,$1,$(local_var)))
+SUBDIRS$1 := $$(COMPONENTS$1) $$(LIBRARIES$1)
 endef
 
 
