@@ -6,7 +6,7 @@
 #*   By: mgautier <mgautier@student.42.fr>          +#+  +:+       +#+        *#
 #*                                                +#+#+#+#+#+   +#+           *#
 #*   Created: 2017/10/31 12:38:29 by mgautier          #+#    #+#             *#
-#*   Updated: 2017/10/31 15:01:14 by mgautier         ###   ########.fr       *#
+#*   Updated: 2017/11/02 11:33:34 by mgautier         ###   ########.fr       *#
 #*                                                                            *#
 #* ************************************************************************** *#
 
@@ -26,7 +26,7 @@ ext_dependencies = $(intermediate_target) $(foreach sub,$(SUBDIRS$1),\
 all_includes = $(INC_DIR$1) $(foreach sub,$(SUBDIRS$1),\
 				   $(call all_includes,sub))
 compile_time_include = $(foreach inc_dir, $(all_includes), -iquote$(inc_dir))
-objects = $(patsubst %$(src_suffix),$(obj_dir)%$(obj_suffix),$(SRC$1))
+objects = $(patsubst %$(src_suffix),$(obj_dir)/%$(obj_suffix),$(SRC$1))
 obj_dir = $1$(OBJ_DIR$1)
 src_dir = $1$(SRC_DIR$1)
 
@@ -36,6 +36,7 @@ $(call $(if $(findstring lib,$(TARGET$1)),Lib_rule,Exe_rule),$1)
 endef
 
 define Exe_rule
+$(info Exe)
 $(target):$(intermediate_target) $(ext_dependencies)
 	$(LINK_EXE)
 
@@ -44,21 +45,25 @@ $(intermediate_target):$(objects)
 
 $(intermediate_target): include := $(compile_time_include)
 
-$(objects): $(obj_dir)%$(obj_suffix):$(src_dir)%$(src_suffix) | $(obj_dir)
+$(objects): $(obj_dir)/%$(obj_suffix):$(src_dir)/%$(src_suffix) | $(obj_dir)
 	$(COMPILE)
 
 endef
 
+# Rule to make libs. The variable $(TARGET$1) must be modified to allow the
+# standard target all to work correctly.
 define Lib_rule
 $(target).so $(target).a: $(objects)
 	$(LINK_LIB)
+
+TARGET$1 := $1$(TARGET$1).a
 
 $(target).so $(target).a: include := $(compile_time_include)
 
 $(target).so: cflags := $(cflags) $(shared_lib_compile_flags) 
 $(target).a: cflags := $(cflags) $(static_lib_compile_flags) 
 
-$(objects): $(obj_dir)%$(obj_suffix):$(src_dir)%$(src_suffix) | $(obj_dir)
+$(objects): $(obj_dir)/%$(obj_suffix):$(src_dir)/%$(src_suffix) | $(obj_dir)
 	$(COMPILE)
 
 endef
