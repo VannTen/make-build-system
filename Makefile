@@ -6,7 +6,7 @@
 #*   By: mgautier <mgautier@student.42.fr>          +#+  +:+       +#+        *#
 #*                                                +#+#+#+#+#+   +#+           *#
 #*   Created: 2017/10/31 14:28:22 by mgautier          #+#    #+#             *#
-#*   Updated: 2017/11/02 14:56:28 by mgautier         ###   ########.fr       *#
+#*   Updated: 2017/11/02 15:45:32 by mgautier         ###   ########.fr       *#
 #*                                                                            *#
 #* ************************************************************************** *#
 
@@ -38,11 +38,12 @@ $(eval $(call Apply_to_src_tree,$(srcdir),Dir_rules))
 # if they exist (if they dont, objects or deps or whatever else
 # are simply in the same repository than the target
 
-all_of_dir_subtree = $(foreach dir_name,$2,\
-					 $(if $($(dir_name)$1),$1$($(dir_name)$1)))\
+all_of_dir_subtree = $(if $(OBJ_DIR$1),$(call all_suffix,$1,$(OBJ_DIR$1)))\
 					 $(foreach sub,$(SUBDIRS$1),$(call $0,$1$(sub)/,$2))
 
-all_suffix = $(foreach suffix_,$(suffix_list$1),$(addsuffix $(suffix_),$2))
+all_suffix = $(if $(suffix_list$1),\
+			 $(foreach suffix_,$(suffix_list$1),$1$2$(suffix_)),$1$2)
+
 # Rules to create needed directory (object, deps, etc)
 
 $(call all_of_dir_subtree,$(srcdir),OBJ_DIR):

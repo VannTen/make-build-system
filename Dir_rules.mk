@@ -6,7 +6,7 @@
 #*   By: mgautier <mgautier@student.42.fr>          +#+  +:+       +#+        *#
 #*                                                +#+#+#+#+#+   +#+           *#
 #*   Created: 2017/10/31 12:38:29 by mgautier          #+#    #+#             *#
-#*   Updated: 2017/11/02 14:44:55 by mgautier         ###   ########.fr       *#
+#*   Updated: 2017/11/02 15:47:09 by mgautier         ###   ########.fr       *#
 #*                                                                            *#
 #* ************************************************************************** *#
 
@@ -28,7 +28,7 @@ all_includes = $(INC_DIR$1) $(foreach sub,$(SUBDIRS$1),\
 compile_time_include = $(foreach inc_dir, $(all_includes), -iquote$(inc_dir))
 
 objects = $(patsubst %$(src_suffix),$(obj_dir)/%$(obj_suffix),$(SRC$1))
-obj_dir = $1$2$(OBJ_DIR$1)
+obj_dir = $1$(OBJ_DIR$1)$2
 src_dir = $1$(SRC_DIR$1)
 
 # Variable compilers flags
@@ -79,7 +79,7 @@ endef
 
 include Lib_rules.mk
 define Lib_rule
-$(info Lib)
+suffix_list$1:= $(suffix_list$1) $(shared_lib_suffix) $(static_lib_suffix)
 $(call Lib_rule_specific,$1,$(shared_lib_suffix))
 $(call Lib_rule_specific,$1,$(static_lib_suffix))
 
