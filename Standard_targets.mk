@@ -6,7 +6,7 @@
 #*   By: mgautier <mgautier@student.42.fr>          +#+  +:+       +#+        *#
 #*                                                +#+#+#+#+#+   +#+           *#
 #*   Created: 2017/10/31 15:04:08 by mgautier          #+#    #+#             *#
-#*   Updated: 2017/11/02 14:56:02 by mgautier         ###   ########.fr       *#
+#*   Updated: 2017/11/03 14:24:01 by mgautier         ###   ########.fr       *#
 #*                                                                            *#
 #* ************************************************************************** *#
 
@@ -18,11 +18,14 @@ standard_targets := all clean fclean re
 
 all: $(call target,$(srcdir)) ## Build the default target for that directory
 
+all_of = $(info $1 $2)$(call $1,$2) $(foreach sub,$(SUBDIRS),$(call $0,$2$(sub)/))
+
 clean: ## Clean object files
-	$(QUIET) $(clean_objects)
+	$(QUIET) $(RM) $(call all_of,objects,$(srcdir))
 
 fclean: clean ## Same as clean, but also clean the targets
-	$(QUIET) $(clean_targets)
+	$(QUIET) $(RM) $(call all_of,intermediate_target,$(srcdir))\
+		$(call target,$(srcdir))
 
 re: fclean all ## Redo a clean build (unsafe with --jobs)
 

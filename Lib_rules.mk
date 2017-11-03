@@ -6,10 +6,11 @@
 #*   By: mgautier <mgautier@student.42.fr>          +#+  +:+       +#+        *#
 #*                                                +#+#+#+#+#+   +#+           *#
 #*   Created: 2017/11/02 14:18:27 by mgautier          #+#    #+#             *#
-#*   Updated: 2017/11/02 14:55:14 by mgautier         ###   ########.fr       *#
+#*   Updated: 2017/11/03 14:23:07 by mgautier         ###   ########.fr       *#
 #*                                                                            *#
 #* ************************************************************************** *#
 
+.LIBPATTERNS= lib%.a lib%.so
 define Lib_rule_specific
 $(target).$2: $(objects)
 	$$(LINK_LIB)

@@ -6,7 +6,7 @@
 #*   By: mgautier <mgautier@student.42.fr>          +#+  +:+       +#+        *#
 #*                                                +#+#+#+#+#+   +#+           *#
 #*   Created: 2017/10/31 12:38:36 by mgautier          #+#    #+#             *#
-#*   Updated: 2017/11/02 14:15:47 by mgautier         ###   ########.fr       *#
+#*   Updated: 2017/11/03 14:24:40 by mgautier         ###   ########.fr       *#
 #*                                                                            *#
 #* ************************************************************************** *#
 
@@ -29,13 +29,16 @@ local_variables_list :=\
 #
 # It expect one argument, the name of the directory
 #
-define define_local_variables
+
+define _loc_var
 include $1Srcs.mk
 $(foreach local_var,$(local_variables_list),\
 	$(call assign_local,$1,$(local_var)))
 SUBDIRS$1 := $$(COMPONENTS$1) $$(LIBRARIES$1)
+
 endef
 
+define_local_variables = $(eval $(call _loc_var,$1))
 
 # This function assign to one directory specific variable its value.
 # (which is based on the current global value of that variable)
