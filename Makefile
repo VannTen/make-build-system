@@ -6,9 +6,12 @@
 #*   By: mgautier <mgautier@student.42.fr>          +#+  +:+       +#+        *#
 #*                                                +#+#+#+#+#+   +#+           *#
 #*   Created: 2017/10/31 14:28:22 by mgautier          #+#    #+#             *#
-#*   Updated: 2017/11/03 11:47:56 by mgautier         ###   ########.fr       *#
+#*   Updated: 2017/11/03 14:37:30 by mgautier         ###   ########.fr       *#
 #*                                                                            *#
 #* ************************************************************************** *#
+
+# Makefile all-purpose functions
+include dir_relative_macros.mk
 
 # Functions definitions
 include Dir_traversal.mk
@@ -34,21 +37,9 @@ override srcdir := $(srcdir)/
 $(eval $(call Apply_to_src_tree,$(srcdir),define_local_variables))
 $(eval $(call Apply_to_src_tree,$(srcdir),Dir_rules))
 
-# Function to collect directory names accross the source tree,
-# if they exist (if they dont, objects or deps or whatever else
-# are simply in the same repository than the target
 
-all_of_dir_subtree = $(if $(OBJ_DIR$1),$(call all_suffix,$1,$(OBJ_DIR$1)))\
-					 $(foreach sub,$(SUBDIRS$1),$(call $0,$1$(sub)/,$2))
-
-all_suffix = $(if $(suffix_list$1),\
-			 $(foreach suffix_,$(suffix_list$1),$1$2$(suffix_)),$1$2)
-
-# Rules to create needed directory (object, deps, etc)
-
-$(call all_of_dir_subtree,$(srcdir),OBJ_DIR):
-	$(QUIET) $(MKDIR) $@
-
+# Define rules for directories and other kind of simple global rules
+include General_rules.mk
 
 # Define standard make targets to be used by the make invoker, and link them to
 # the main target (= the default target of the source tree root directory)
