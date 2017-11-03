@@ -6,7 +6,7 @@
 #*   By: mgautier <mgautier@student.42.fr>          +#+  +:+       +#+        *#
 #*                                                +#+#+#+#+#+   +#+           *#
 #*   Created: 2017/10/31 14:28:22 by mgautier          #+#    #+#             *#
-#*   Updated: 2017/11/03 14:37:30 by mgautier         ###   ########.fr       *#
+#*   Updated: 2017/11/03 15:58:19 by mgautier         ###   ########.fr       *#
 #*                                                                            *#
 #* ************************************************************************** *#
 
@@ -17,6 +17,7 @@ include dir_relative_macros.mk
 include Dir_traversal.mk
 include Dir_var.mk
 include Dir_rules.mk
+include Unit_tests.mk
 
 # Tools variable settings
 include Config.mk
@@ -35,7 +36,7 @@ override srcdir := $(srcdir)/
 # target and local dependencies (aka object files)
 
 $(eval $(call Apply_to_src_tree,$(srcdir),define_local_variables))
-$(eval $(call Apply_to_src_tree,$(srcdir),Dir_rules))
+$(eval $(call Apply_to_src_tree,$(srcdir),Dir_rules Unit_tests))
 
 
 # Define rules for directories and other kind of simple global rules

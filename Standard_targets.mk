@@ -6,7 +6,7 @@
 #*   By: mgautier <mgautier@student.42.fr>          +#+  +:+       +#+        *#
 #*                                                +#+#+#+#+#+   +#+           *#
 #*   Created: 2017/10/31 15:04:08 by mgautier          #+#    #+#             *#
-#*   Updated: 2017/11/03 14:24:01 by mgautier         ###   ########.fr       *#
+#*   Updated: 2017/11/03 15:57:47 by mgautier         ###   ########.fr       *#
 #*                                                                            *#
 #* ************************************************************************** *#
 
@@ -28,6 +28,8 @@ fclean: clean ## Same as clean, but also clean the targets
 		$(call target,$(srcdir))
 
 re: fclean all ## Redo a clean build (unsafe with --jobs)
+
+check: $(call test,$(srcdir)) ## Perform unit tests
 
 # WARNING : The 're' rules will break on a parallel build, since make will
 # attempt to do 'fclean' and 'all' at the same time, effectively building and
