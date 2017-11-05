@@ -6,7 +6,7 @@
 #*   By: mgautier <mgautier@student.42.fr>          +#+  +:+       +#+        *#
 #*                                                +#+#+#+#+#+   +#+           *#
 #*   Created: 2017/11/03 14:30:29 by mgautier          #+#    #+#             *#
-#*   Updated: 2017/11/03 16:09:04 by mgautier         ###   ########.fr       *#
+#*   Updated: 2017/11/05 13:32:24 by mgautier         ###   ########.fr       *#
 #*                                                                            *#
 #* ************************************************************************** *#
 
@@ -25,8 +25,6 @@ all_suffix = $(if $(suffix_list$1),\
 # Rules to create needed directory (object, deps, etc)
 GENERATED_SUBDIRS := OBJ_DIR TEST_DIR
 
-$(info $(foreach dirs,$(GENERATED_SUBDIRS),\
-	$(call all_of_dir_subtree,$(srcdir),$(dirs))))
 $(foreach dirs,$(GENERATED_SUBDIRS),\
 	$(call all_of_dir_subtree,$(srcdir),$(dirs))):
 	$(QUIET) $(MKDIR) $@

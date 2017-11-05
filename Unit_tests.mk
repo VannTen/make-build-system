@@ -6,7 +6,7 @@
 #*   By: mgautier <mgautier@student.42.fr>          +#+  +:+       +#+        *#
 #*                                                +#+#+#+#+#+   +#+           *#
 #*   Created: 2017/11/03 14:51:37 by mgautier          #+#    #+#             *#
-#*   Updated: 2017/11/03 16:03:05 by mgautier         ###   ########.fr       *#
+#*   Updated: 2017/11/05 13:57:30 by mgautier         ###   ########.fr       *#
 #*                                                                            *#
 #* ************************************************************************** *#
 
@@ -24,7 +24,7 @@
 #
 # Includes a switch to enable or disable test locally (when they have not be
 # written yet)
-#
+
 
 # All needed variables
 tests = $(patsubst %$(src_suffix),$(test_bin_dir)/%.last,$(SRC$1))
@@ -32,8 +32,8 @@ test = test_$1
 test_exes = $(patsubst %$(src_suffix),$(test_bin_dir)/%,$(SRC$1))
 test_files = $(patsubst %,$(test_src_dir)/%,$(SRC$1))
 
-test_bin_dir = $1bin_$(TEST_DIR$1)
-test_src_dir = $1$(TEST_DIR$1)
+test_bin_dir = $1$(TEST_DIR$1)
+test_src_dir = $1$(TEST_SRC_DIR$1)
 
 # Recipes
 define RUN_TEST
@@ -42,7 +42,7 @@ $(TOUCH) $@
 endef
 
 define BUILD_TEST
-$(CC) $(cflags) $(CFLAGS) $(LDFLAGS) $^ -o $@
+$(CC) $(cflags) $(cppflags) $(CFLAGS) $(CPPFLAGS) $(LDFLAGS) $^ -o $@
 endef
 
 # Main rule, applied by directory
@@ -52,12 +52,15 @@ define Unit_tests
 
 $(test): $(tests)
 
+$(test): include := $(compile_time_include)
+
 $(tests):$(test_bin_dir)/%.last:$(test_bin_dir)/%
 	$(QUIET) $$(RUN_TEST)
 
 $(test_exes):\
 	$(test_bin_dir)/%:\
-	 $(test_src_dir)/%$(src_suffix) $(intermediate_target) | $(test_bin_dir)
+	 $(test_src_dir)/%$(src_suffix)\
+	 $(ext_dependencies) $(patsubst lib%,-l%,$(LIBRARIES$1)) | $(test_bin_dir)
 	$(QUIET) $$(BUILD_TEST)
 
 endef
