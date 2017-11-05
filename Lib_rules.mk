@@ -6,7 +6,7 @@
 #*   By: mgautier <mgautier@student.42.fr>          +#+  +:+       +#+        *#
 #*                                                +#+#+#+#+#+   +#+           *#
 #*   Created: 2017/11/02 14:18:27 by mgautier          #+#    #+#             *#
-#*   Updated: 2017/11/03 14:23:07 by mgautier         ###   ########.fr       *#
+#*   Updated: 2017/11/05 14:04:50 by mgautier         ###   ########.fr       *#
 #*                                                                            *#
 #* ************************************************************************** *#
 
@@ -25,5 +25,14 @@ $(target).$2: cflags := $(cflags)\
 
 $(objects): $(obj_dir)/%$(obj_suffix):$(src_dir)/%$(src_suffix) | $(obj_dir)
 	$$(COMPILE)
+
+endef
+
+define Lib_rule
+suffix_list$1:= $(suffix_list$1) $(shared_lib_suffix) $(static_lib_suffix)
+$(call Lib_rule_specific,$1,$(static_lib_suffix))
+$(call Lib_rule_specific,$1,$(shared_lib_suffix))
+vpath $(TARGET$1).$(shared_lib_suffix) $1
+vpath $(TARGET$1).$(static_lib_suffix) $1
 
 endef

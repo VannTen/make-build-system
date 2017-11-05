@@ -6,7 +6,7 @@
 #*   By: mgautier <mgautier@student.42.fr>          +#+  +:+       +#+        *#
 #*                                                +#+#+#+#+#+   +#+           *#
 #*   Created: 2017/10/31 12:38:29 by mgautier          #+#    #+#             *#
-#*   Updated: 2017/11/03 14:36:00 by mgautier         ###   ########.fr       *#
+#*   Updated: 2017/11/05 14:04:52 by mgautier         ###   ########.fr       *#
 #*                                                                            *#
 #* ************************************************************************** *#
 
@@ -36,7 +36,10 @@ LINK_LIB = $(if $(findstring a,$(suffix $@)),\
 LINK_STATIC_LIB = $(AR) $(ARFLAGS) $@ $?
 LINK_DYNAMIC_LIB = $(CC) $(LDFLAGS) $(shared_flag) -o $@ $^
 LINK_EXE = $(CC) $(LDFLAGS) -o $@ $+
- 
+
+# Core rules for a directory : the target, the intermediate target, and the
+# objects
+
 define Dir_rules
 $(call $(if $(findstring lib,$(TARGET$1)),Lib_rule,Exe_rule),$1)
 endef
@@ -59,12 +62,3 @@ endef
 # standard target all to work correctly.
 #
 
-include Lib_rules.mk
-define Lib_rule
-suffix_list$1:= $(suffix_list$1) $(shared_lib_suffix) $(static_lib_suffix)
-$(call Lib_rule_specific,$1,$(static_lib_suffix))
-$(call Lib_rule_specific,$1,$(shared_lib_suffix))
-vpath $(TARGET$1).$(shared_lib_suffix) $1
-vpath $(TARGET$1).$(static_lib_suffix) $1
-
-endef
