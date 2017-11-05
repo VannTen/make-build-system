@@ -6,7 +6,7 @@
 #*   By: mgautier <mgautier@student.42.fr>          +#+  +:+       +#+        *#
 #*                                                +#+#+#+#+#+   +#+           *#
 #*   Created: 2017/11/05 14:05:22 by mgautier          #+#    #+#             *#
-#*   Updated: 2017/11/05 14:08:31 by mgautier         ###   ########.fr       *#
+#*   Updated: 2017/11/05 14:16:34 by mgautier         ###   ########.fr       *#
 #*                                                                            *#
 #* ************************************************************************** *#
 
@@ -16,5 +16,5 @@
 # Alternatively, make can be aliased to 'make
 # makefiles_dir=/absolute/path/of/makefiles/dir'
 
-makefiles_dir := 
+makefiles_dir := .
 include $(makefiles_dir)/Makefile
