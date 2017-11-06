@@ -6,7 +6,7 @@
 #*   By: mgautier <mgautier@student.42.fr>          +#+  +:+       +#+        *#
 #*                                                +#+#+#+#+#+   +#+           *#
 #*   Created: 2017/10/19 15:26:46 by mgautier          #+#    #+#             *#
-#*   Updated: 2017/11/02 14:54:10 by mgautier         ###   ########.fr       *#
+#*   Updated: 2017/11/06 10:55:14 by mgautier         ###   ########.fr       *#
 #*                                                                            *#
 #* ************************************************************************** *#
 
@@ -34,7 +34,7 @@ SYNTAX_FLAGS := -fsyntax-only -ferror-limit=0
 OPTI_CFLAGS := -flto -Ofast
 OPTI_LDFLAGS := -flto
 PROFILE_FLAGS :=
-CFLAGS := $(CFLAGS) $(ERROR_FLAGS)
+CFLAGS := $(CFLAGS) $(ERROR_FLAGS) $(DEBUG_FLAGS)
 ARFLAGS = rc
 
 # OS dependendant flags 
