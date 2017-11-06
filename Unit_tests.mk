@@ -6,7 +6,7 @@
 #*   By: mgautier <mgautier@student.42.fr>          +#+  +:+       +#+        *#
 #*                                                +#+#+#+#+#+   +#+           *#
 #*   Created: 2017/11/03 14:51:37 by mgautier          #+#    #+#             *#
-#*   Updated: 2017/11/05 13:57:30 by mgautier         ###   ########.fr       *#
+#*   Updated: 2017/11/05 16:43:55 by mgautier         ###   ########.fr       *#
 #*                                                                            *#
 #* ************************************************************************** *#
 
@@ -46,7 +46,10 @@ $(CC) $(cflags) $(cppflags) $(CFLAGS) $(CPPFLAGS) $(LDFLAGS) $^ -o $@
 endef
 
 # Main rule, applied by directory
-define Unit_tests
+
+Unit_tests = $(if $(TEST_DIR$1),$(Unit_tests_intern))
+
+define Unit_tests_intern
 
 .PHONY: $(test)
 
