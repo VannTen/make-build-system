@@ -6,7 +6,7 @@
 #*   By: mgautier <mgautier@student.42.fr>          +#+  +:+       +#+        *#
 #*                                                +#+#+#+#+#+   +#+           *#
 #*   Created: 2017/11/03 14:51:37 by mgautier          #+#    #+#             *#
-#*   Updated: 2017/11/05 16:43:55 by mgautier         ###   ########.fr       *#
+#*   Updated: 2017/11/06 10:50:43 by mgautier         ###   ########.fr       *#
 #*                                                                            *#
 #* ************************************************************************** *#
 
@@ -37,7 +37,7 @@ test_src_dir = $1$(TEST_SRC_DIR$1)
 
 # Recipes
 define RUN_TEST
-./$<
+$(if $(findstring $(CURDIR),$<),,./)$<
 $(TOUCH) $@
 endef
 
