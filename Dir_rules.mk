@@ -6,7 +6,7 @@
 #*   By: mgautier <mgautier@student.42.fr>          +#+  +:+       +#+        *#
 #*                                                +#+#+#+#+#+   +#+           *#
 #*   Created: 2017/10/31 12:38:29 by mgautier          #+#    #+#             *#
-#*   Updated: 2017/11/05 14:04:52 by mgautier         ###   ########.fr       *#
+#*   Updated: 2017/11/06 11:23:36 by mgautier         ###   ########.fr       *#
 #*                                                                            *#
 #* ************************************************************************** *#
 
@@ -35,7 +35,7 @@ LINK_LIB = $(if $(findstring a,$(suffix $@)),\
 		   $(LINK_STATIC_LIB),$(LINK_DYNAMIC_LIB))
 LINK_STATIC_LIB = $(AR) $(ARFLAGS) $@ $?
 LINK_DYNAMIC_LIB = $(CC) $(LDFLAGS) $(shared_flag) -o $@ $^
-LINK_EXE = $(CC) $(LDFLAGS) -o $@ $+
+LINK_EXE = $(CC) $(CFLAGS) $(LDFLAGS) -o $@ $+
 
 # Core rules for a directory : the target, the intermediate target, and the
 # objects

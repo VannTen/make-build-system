@@ -6,7 +6,7 @@
 #*   By: mgautier <mgautier@student.42.fr>          +#+  +:+       +#+        *#
 #*                                                +#+#+#+#+#+   +#+           *#
 #*   Created: 2017/11/02 14:18:27 by mgautier          #+#    #+#             *#
-#*   Updated: 2017/11/05 14:04:50 by mgautier         ###   ########.fr       *#
+#*   Updated: 2017/11/06 11:25:30 by mgautier         ###   ########.fr       *#
 #*                                                                            *#
 #* ************************************************************************** *#
 
@@ -31,8 +31,8 @@ endef
 define Lib_rule
 suffix_list$1:= $(suffix_list$1) $(shared_lib_suffix) $(static_lib_suffix)
 $(call Lib_rule_specific,$1,$(static_lib_suffix))
-$(call Lib_rule_specific,$1,$(shared_lib_suffix))
-vpath $(TARGET$1).$(shared_lib_suffix) $1
 vpath $(TARGET$1).$(static_lib_suffix) $1
 
 endef
+#$(call Lib_rule_specific,$1,$(shared_lib_suffix))
+#vpath $(TARGET$1).$(shared_lib_suffix) $1
