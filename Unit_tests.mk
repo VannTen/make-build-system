@@ -6,7 +6,7 @@
 #*   By: mgautier <mgautier@student.42.fr>          +#+  +:+       +#+        *#
 #*                                                +#+#+#+#+#+   +#+           *#
 #*   Created: 2017/11/03 14:51:37 by mgautier          #+#    #+#             *#
-#*   Updated: 2017/11/06 10:50:43 by mgautier         ###   ########.fr       *#
+#*   Updated: 2017/11/08 15:53:01 by mgautier         ###   ########.fr       *#
 #*                                                                            *#
 #* ************************************************************************** *#
 
@@ -25,19 +25,28 @@
 # Includes a switch to enable or disable test locally (when they have not be
 # written yet)
 
+local_variables_list_unit_test :=\
+	TEST_DIR\
+	TEST_SRC_DIR\
+	DONT_TEST\
+	STATIC_TEST_FILES
+
 
 # All needed variables
-tests = $(patsubst %$(src_suffix),$(test_bin_dir)/%.last,$(SRC$1))
+
+to_test = $(filter-out $(DONT_TEST$1),$(SRC$1))
+tests = $(patsubst %$(src_suffix),$(test_bin_dir)/%.last,$(to_test))
 test = test_$1
-test_exes = $(patsubst %$(src_suffix),$(test_bin_dir)/%,$(SRC$1))
+test_exes = $(patsubst %$(src_suffix),$(test_bin_dir)/%,$(to_test))
 test_files = $(patsubst %,$(test_src_dir)/%,$(SRC$1))
+static_test_files = $(patsubst %,$(test_src_dir)/%,$(STATIC_TEST_FILES$1))
 
 test_bin_dir = $1$(TEST_DIR$1)
 test_src_dir = $1$(TEST_SRC_DIR$1)
 
 # Recipes
 define RUN_TEST
-$(if $(findstring $(CURDIR),$<),,./)$<
+$(if $(findstring $(CURDIR),$<),,./)$^
 $(TOUCH) $@
 endef
 
@@ -57,7 +66,7 @@ $(test): $(tests)
 
 $(test): include := $(compile_time_include)
 
-$(tests):$(test_bin_dir)/%.last:$(test_bin_dir)/%
+$(tests):$(test_bin_dir)/%.last:$(test_bin_dir)/% $(static_test_files)
 	$(QUIET) $$(RUN_TEST)
 
 $(test_exes):\

@@ -6,7 +6,7 @@
 #*   By: mgautier <mgautier@student.42.fr>          +#+  +:+       +#+        *#
 #*                                                +#+#+#+#+#+   +#+           *#
 #*   Created: 2017/10/31 12:38:36 by mgautier          #+#    #+#             *#
-#*   Updated: 2017/11/05 13:33:21 by mgautier         ###   ########.fr       *#
+#*   Updated: 2017/11/08 16:08:41 by mgautier         ###   ########.fr       *#
 #*                                                                            *#
 #* ************************************************************************** *#
 
@@ -19,11 +19,11 @@ local_variables_list :=\
 	OBJ_DIR\
 	SRC_DIR\
 	INC_DIR\
-	TEST_DIR\
-	TEST_SRC_DIR\
 	COMPONENTS\
 	LIBRARIES\
-	TARGET
+	TARGET\
+	$(local_variables_list_unit_test)\
+	$(local_variables_list_functional_test)
 
 # The function is intended to set the value of variable which are
 # specific to each directory, that is, the list of source files, the various

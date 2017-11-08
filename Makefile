@@ -6,19 +6,23 @@
 #*   By: mgautier <mgautier@student.42.fr>          +#+  +:+       +#+        *#
 #*                                                +#+#+#+#+#+   +#+           *#
 #*   Created: 2017/10/31 14:28:22 by mgautier          #+#    #+#             *#
-#*   Updated: 2017/11/06 10:22:45 by mgautier         ###   ########.fr       *#
+#*   Updated: 2017/11/08 16:05:16 by mgautier         ###   ########.fr       *#
 #*                                                                            *#
 #* ************************************************************************** *#
 
 # Makefile all-purpose functions
 include $(makefiles_dir)/dir_relative_macros.mk
 
-# Functions definitions
+# Plugins 
+include $(makefiles_dir)/Lib_rules.mk
+include $(makefiles_dir)/Unit_tests.mk
+include $(makefiles_dir)/Function_tests.mk
+
+# Core functions definitions (need to be read after plugins in order to make the
+# general functions use data provided by the plugins
 include $(makefiles_dir)/Dir_traversal.mk
 include $(makefiles_dir)/Dir_var.mk
 include $(makefiles_dir)/Dir_rules.mk
-include $(makefiles_dir)/Lib_rules.mk
-include $(makefiles_dir)/Unit_tests.mk
 
 # Tools variable settings
 include $(makefiles_dir)/Config.mk
@@ -37,8 +41,10 @@ override srcdir := $(srcdir)/
 # target and local dependencies (aka object files)
 
 $(eval $(call Apply_to_src_tree,$(srcdir),define_local_variables))
-$(eval $(call Apply_to_src_tree,$(srcdir),Dir_rules Unit_tests))
-
+$(eval $(call Apply_to_src_tree,$(srcdir),\
+	Dir_rules\
+	Unit_tests\
+	Function_tests))
 
 # Define rules for directories and other kind of simple global rules
 include $(makefiles_dir)/General_rules.mk
