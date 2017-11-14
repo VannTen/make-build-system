@@ -6,7 +6,7 @@
 #*   By: mgautier <mgautier@student.42.fr>          +#+  +:+       +#+        *#
 #*                                                +#+#+#+#+#+   +#+           *#
 #*   Created: 2017/11/03 14:51:37 by mgautier          #+#    #+#             *#
-#*   Updated: 2017/11/08 15:53:01 by mgautier         ###   ########.fr       *#
+#*   Updated: 2017/11/14 10:13:48 by mgautier         ###   ########.fr       *#
 #*                                                                            *#
 #* ************************************************************************** *#
 
@@ -64,7 +64,7 @@ define Unit_tests_intern
 
 $(test): $(tests)
 
-$(test): include := $(compile_time_include)
+$(tests): include := $(compile_time_include)
 
 $(tests):$(test_bin_dir)/%.last:$(test_bin_dir)/% $(static_test_files)
 	$(QUIET) $$(RUN_TEST)

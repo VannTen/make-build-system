@@ -6,7 +6,7 @@
 #*   By: mgautier <mgautier@student.42.fr>          +#+  +:+       +#+        *#
 #*                                                +#+#+#+#+#+   +#+           *#
 #*   Created: 2017/10/31 12:38:29 by mgautier          #+#    #+#             *#
-#*   Updated: 2017/11/06 11:23:36 by mgautier         ###   ########.fr       *#
+#*   Updated: 2017/11/14 10:13:50 by mgautier         ###   ########.fr       *#
 #*                                                                            *#
 #* ************************************************************************** *#
 
@@ -51,7 +51,7 @@ $(target):$(ext_dependencies) $(patsubst lib%,-l%,$(LIBRARIES$1))
 $(intermediate_target):$(objects)
 	$$(LINK_LIB)
 
-$(intermediate_target): include := $(compile_time_include)
+$(objects): include := $(compile_time_include)
 
 $(objects): $(obj_dir)/%$(obj_suffix):$(src_dir)/%$(src_suffix) | $(obj_dir)
 	$$(COMPILE)
