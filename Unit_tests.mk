@@ -6,7 +6,7 @@
 #*   By: mgautier <mgautier@student.42.fr>          +#+  +:+       +#+        *#
 #*                                                +#+#+#+#+#+   +#+           *#
 #*   Created: 2017/11/03 14:51:37 by mgautier          #+#    #+#             *#
-#*   Updated: 2017/11/14 10:13:48 by mgautier         ###   ########.fr       *#
+#*   Updated: 2017/12/06 15:55:59 by mgautier         ###   ########.fr       *#
 #*                                                                            *#
 #* ************************************************************************** *#
 
@@ -29,12 +29,13 @@ local_variables_list_unit_test :=\
 	TEST_DIR\
 	TEST_SRC_DIR\
 	DONT_TEST\
+	TEST_SUP\
 	STATIC_TEST_FILES
 
 
 # All needed variables
 
-to_test = $(filter-out $(DONT_TEST$1),$(SRC$1))
+to_test = $(filter-out $(DONT_TEST$1),$(SRC$1) $(TEST_SUP$1))
 tests = $(patsubst %$(src_suffix),$(test_bin_dir)/%.last,$(to_test))
 test = test_$1
 test_exes = $(patsubst %$(src_suffix),$(test_bin_dir)/%,$(to_test))
