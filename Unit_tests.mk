@@ -6,7 +6,7 @@
 #*   By: mgautier <mgautier@student.42.fr>          +#+  +:+       +#+        *#
 #*                                                +#+#+#+#+#+   +#+           *#
 #*   Created: 2017/11/03 14:51:37 by mgautier          #+#    #+#             *#
-#*   Updated: 2017/12/06 15:55:59 by mgautier         ###   ########.fr       *#
+#*   Updated: 2017/12/13 17:09:40 by mgautier         ###   ########.fr       *#
 #*                                                                            *#
 #* ************************************************************************** *#
 
@@ -40,6 +40,7 @@ tests = $(patsubst %$(src_suffix),$(test_bin_dir)/%.last,$(to_test))
 test = test_$1
 test_exes = $(patsubst %$(src_suffix),$(test_bin_dir)/%,$(to_test))
 test_files = $(patsubst %,$(test_src_dir)/%,$(SRC$1))
+test_obj_files = $(patsubst %,%$(obj_suffix),$(test_exes))
 static_test_files = $(patsubst %,$(test_src_dir)/%,$(STATIC_TEST_FILES$1))
 
 test_bin_dir = $1$(TEST_DIR$1)
@@ -52,7 +53,11 @@ $(TOUCH) $@
 endef
 
 define BUILD_TEST
-$(CC) $(cflags) $(cppflags) $(CFLAGS) $(CPPFLAGS) $(LDFLAGS) $^ -o $@
+$(CC) $(cflags) $(CFLAGS) $(LDFLAGS) $^ -o $@
+endef
+
+define COMPILE_TEST
+$(CC) $(cflags) $(cppflags) $(CFLAGS) $(CPPFLAGS) $(LDFLAGS) $< -c -o $@
 endef
 
 # Main rule, applied by directory
@@ -72,8 +77,12 @@ $(tests):$(test_bin_dir)/%.last:$(test_bin_dir)/% $(static_test_files)
 
 $(test_exes):\
 	$(test_bin_dir)/%:\
-	 $(test_src_dir)/%$(src_suffix)\
+	 $(test_bin_dir)/%$(obj_suffix)\
 	 $(ext_dependencies) $(patsubst lib%,-l%,$(LIBRARIES$1)) | $(test_bin_dir)
 	$(QUIET) $$(BUILD_TEST)
+
+$(test_obj_files):$(test_bin_dir)/%$(obj_suffix):$(test_src_dir)/%$(src_suffix)\
+	| $(test_bin_dir)
+	$(QUIET) $$(COMPILE_TEST)
 
 endef

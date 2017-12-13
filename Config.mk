@@ -6,7 +6,7 @@
 #*   By: mgautier <mgautier@student.42.fr>          +#+  +:+       +#+        *#
 #*                                                +#+#+#+#+#+   +#+           *#
 #*   Created: 2017/10/19 15:26:46 by mgautier          #+#    #+#             *#
-#*   Updated: 2017/11/06 10:55:14 by mgautier         ###   ########.fr       *#
+#*   Updated: 2017/12/13 17:08:51 by mgautier         ###   ########.fr       *#
 #*                                                                            *#
 #* ************************************************************************** *#
 
@@ -54,3 +54,10 @@ src_suffix := .c
 shared_lib_suffix := so
 static_lib_suffix := a
 shared_lib_compile_flags := -fpic
+
+
+# Makefile defaults
+#
+
+# Run command silently by default.
+QUIET := @
