@@ -6,14 +6,14 @@
 #*   By: mgautier <mgautier@student.42.fr>          +#+  +:+       +#+        *#
 #*                                                +#+#+#+#+#+   +#+           *#
 #*   Created: 2017/11/02 14:18:27 by mgautier          #+#    #+#             *#
-#*   Updated: 2017/11/11 16:57:48 by mgautier         ###   ########.fr       *#
+#*   Updated: 2017/12/18 15:42:53 by mgautier         ###   ########.fr       *#
 #*                                                                            *#
 #* ************************************************************************** *#
 
 .LIBPATTERNS= lib%.a lib%.so
 define Lib_rule_specific
 $(target).$2: $(objects)
-	$$(LINK_LIB)
+	$(QUIET) $$(LINK_LIB)
 
 $(target): $(target).$2
 
@@ -24,7 +24,7 @@ $(target).$2: cflags := $(cflags)\
 	$(shared_lib_compile_flags),$(static_lib_compile_flags))
 
 $(objects): $(obj_dir)/%$(obj_suffix):$(src_dir)/%$(src_suffix) | $(obj_dir)
-	$$(COMPILE)
+	$(QUIET) $$(COMPILE)
 
 endef
 
