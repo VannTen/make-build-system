@@ -6,7 +6,7 @@
 #*   By: mgautier <mgautier@student.42.fr>          +#+  +:+       +#+        *#
 #*                                                +#+#+#+#+#+   +#+           *#
 #*   Created: 2017/10/31 12:38:29 by mgautier          #+#    #+#             *#
-#*   Updated: 2017/11/14 10:13:50 by mgautier         ###   ########.fr       *#
+#*   Updated: 2017/12/18 10:12:01 by mgautier         ###   ########.fr       *#
 #*                                                                            *#
 #* ************************************************************************** *#
 
@@ -46,15 +46,15 @@ endef
 
 define Exe_rule
 $(target):$(ext_dependencies) $(patsubst lib%,-l%,$(LIBRARIES$1))
-	$$(LINK_EXE)
+	$(QUIET) $$(LINK_EXE)
 
 $(intermediate_target):$(objects)
-	$$(LINK_LIB)
+	$(QUIET) $$(LINK_LIB)
 
 $(objects): include := $(compile_time_include)
 
 $(objects): $(obj_dir)/%$(obj_suffix):$(src_dir)/%$(src_suffix) | $(obj_dir)
-	$$(COMPILE)
+	$(QUIET) $$(COMPILE)
 
 endef
 
