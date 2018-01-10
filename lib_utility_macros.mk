@@ -6,13 +6,16 @@
 #*   By: mgautier <mgautier@student.42.fr>          +#+  +:+       +#+        *#
 #*                                                +#+#+#+#+#+   +#+           *#
 #*   Created: 2018/01/10 13:12:16 by mgautier          #+#    #+#             *#
-#*   Updated: 2018/01/10 14:43:19 by mgautier         ###   ########.fr       *#
+#*   Updated: 2018/01/10 16:35:35 by mgautier         ###   ########.fr       *#
 #*                                                                            *#
 #* ************************************************************************** *#
 
 ifndef LIB_UTILITY_MACROS_MK
 LIB_UTILITY_MACROS_MK = $()
 
+# Those macros idea come from :
+# https://stackoverflow.com/a/665045/7208947
+# (from user : https://stackoverflow.com/users/77345/eric-melski)
 lower_case =$(subst A,a,$(subst B,b,$(subst C,c,$(subst D,d,\
 $(subst E,e,$(subst\
 F,f,$(subst G,g,$(subst H,h,$(subst I,i,$(subst J,j,$(subst K,k,$(subst\
