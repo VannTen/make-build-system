@@ -6,7 +6,7 @@
 #*   By: mgautier <mgautier@student.42.fr>          +#+  +:+       +#+        *#
 #*                                                +#+#+#+#+#+   +#+           *#
 #*   Created: 2017/11/03 14:30:29 by mgautier          #+#    #+#             *#
-#*   Updated: 2017/11/05 13:32:24 by mgautier         ###   ########.fr       *#
+#*   Updated: 2018/01/10 15:24:52 by mgautier         ###   ########.fr       *#
 #*                                                                            *#
 #* ************************************************************************** *#
 
@@ -18,7 +18,7 @@
 # are simply in the same repository than the target
 
 all_of_dir_subtree = $(if $($2$1),$(call all_suffix,$1,$($2$1)))\
-					 $(foreach sub,$(SUBDIRS$1),$(call $0,$1$(sub)/,$2))
+					 $(foreach sub,$(SUBDIRS_$1),$(call $0,$1$(sub)/,$2))
 all_suffix = $(if $(suffix_list$1),\
 			 $(foreach suffix_,$(suffix_list$1),$1$2$(suffix_)),$1$2)
 
@@ -26,5 +26,5 @@ all_suffix = $(if $(suffix_list$1),\
 GENERATED_SUBDIRS := OBJ_DIR TEST_DIR
 
 $(foreach dirs,$(GENERATED_SUBDIRS),\
-	$(call all_of_dir_subtree,$(srcdir),$(dirs))):
+	$(call all_of_dir_subtree,$(srcdir),$(dirs)_)):
 	$(QUIET) $(MKDIR) $@
