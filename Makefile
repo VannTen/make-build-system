@@ -6,7 +6,7 @@
 #*   By: mgautier <mgautier@student.42.fr>          +#+  +:+       +#+        *#
 #*                                                +#+#+#+#+#+   +#+           *#
 #*   Created: 2017/10/31 14:28:22 by mgautier          #+#    #+#             *#
-#*   Updated: 2017/11/08 16:05:16 by mgautier         ###   ########.fr       *#
+#*   Updated: 2018/01/10 15:04:05 by mgautier         ###   ########.fr       *#
 #*                                                                            *#
 #* ************************************************************************** *#
 
@@ -34,8 +34,7 @@ include $(makefiles_dir)/Config.mk
 # that will do for now.
 # Also default $(srcdir) to the current dirrectory (for make)
 
-srcdir ?= $(CURDIR)
-override srcdir := $(srcdir)/
+override srcdir := $(srcdir)$(if $(strip $(srcdir)),/)
 
 # Parsing the source tree for source files and establishing rules for each
 # target and local dependencies (aka object files)

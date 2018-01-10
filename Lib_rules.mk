@@ -6,7 +6,7 @@
 #*   By: mgautier <mgautier@student.42.fr>          +#+  +:+       +#+        *#
 #*                                                +#+#+#+#+#+   +#+           *#
 #*   Created: 2017/11/02 14:18:27 by mgautier          #+#    #+#             *#
-#*   Updated: 2017/12/18 15:42:53 by mgautier         ###   ########.fr       *#
+#*   Updated: 2018/01/10 15:16:15 by mgautier         ###   ########.fr       *#
 #*                                                                            *#
 #* ************************************************************************** *#
 
@@ -23,14 +23,14 @@ $(target).$2: cflags := $(cflags)\
 	$(if $(findstring $(shared_lib_suffix),$2),\
 	$(shared_lib_compile_flags),$(static_lib_compile_flags))
 
-$(objects): $(obj_dir)/%$(obj_suffix):$(src_dir)/%$(src_suffix) | $(obj_dir)
+$(objects): $(obj_dir)%$(obj_suffix):$(src_dir)%$(src_suffix) | $(obj_dir)
 	$(QUIET) $$(COMPILE)
 
 endef
 
 define Lib_rule
 $(call Lib_rule_specific,$1,$(static_lib_suffix))
-vpath $(TARGET$1).$(static_lib_suffix) $1
+vpath $(TARGET_$1).$(static_lib_suffix) $1
 
 endef
 #suffix_list$1:= $(suffix_list$1) $(shared_lib_suffix) $(static_lib_suffix)

@@ -6,7 +6,7 @@
 #*   By: mgautier <mgautier@student.42.fr>          +#+  +:+       +#+        *#
 #*                                                +#+#+#+#+#+   +#+           *#
 #*   Created: 2017/10/31 12:38:29 by mgautier          #+#    #+#             *#
-#*   Updated: 2017/12/18 10:12:01 by mgautier         ###   ########.fr       *#
+#*   Updated: 2018/01/10 15:12:56 by mgautier         ###   ########.fr       *#
 #*                                                                            *#
 #* ************************************************************************** *#
 
@@ -21,7 +21,7 @@
 # for each of its prerequisites object files
 cppflags = $(include)
 compile_time_include = \
-   $(foreach INC_DIR,$(INC_DIR$1) $(SUBDIRS$1),-iquote$1$(INC_DIR))
+   $(foreach INC_DIR,$(INC_DIR_$1) $(SUBDIRS_$1),-iquote$1$(INC_DIR))
 
 # Recipes used in the rules below
 
@@ -41,11 +41,11 @@ LINK_EXE = $(CC) $(CFLAGS) $(LDFLAGS) -o $@ $+
 # objects
 
 define Dir_rules
-$(call $(if $(findstring lib,$(TARGET$1)),Lib_rule,Exe_rule),$1)
+$(call $(if $(findstring lib,$(TARGET_$1)),Lib_rule,Exe_rule),$1)
 endef
 
 define Exe_rule
-$(target):$(ext_dependencies) $(patsubst lib%,-l%,$(LIBRARIES$1))
+$(target):$(ext_dependencies) $(patsubst lib%,-l%,$(LIBRARIES_$1))
 	$(QUIET) $$(LINK_EXE)
 
 $(intermediate_target):$(objects)
@@ -53,12 +53,12 @@ $(intermediate_target):$(objects)
 
 $(objects): include := $(compile_time_include)
 
-$(objects): $(obj_dir)/%$(obj_suffix):$(src_dir)/%$(src_suffix) | $(obj_dir)
+$(objects): $(obj_dir)%$(obj_suffix):$(src_dir)%$(src_suffix) | $(obj_dir)
 	$(QUIET) $$(COMPILE)
 
 endef
 
-# Rule to make libs. The variable $(TARGET$1) must be modified to allow the
+# Rule to make libs. The variable $(TARGET_$1) must be modified to allow the
 # standard target all to work correctly.
 #
 

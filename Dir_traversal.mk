@@ -6,7 +6,7 @@
 #*   By: mgautier <mgautier@student.42.fr>          +#+  +:+       +#+        *#
 #*                                                +#+#+#+#+#+   +#+           *#
 #*   Created: 2017/10/31 12:38:44 by mgautier          #+#    #+#             *#
-#*   Updated: 2017/11/03 11:49:15 by mgautier         ###   ########.fr       *#
+#*   Updated: 2018/01/10 14:59:58 by mgautier         ###   ########.fr       *#
 #*                                                                            *#
 #* ************************************************************************** *#
 
@@ -26,7 +26,7 @@
 
 define	Dir_traversal
 $(call $2,$1)
-$(foreach sub,$(SUBDIRS$1),$(call $0,$1$(sub)/,$2))
+$(foreach sub,$(SUBDIRS_$1),$(call $0,$1$(sub)/,$2))
 endef
 
 # Take an ordered list of function to apply on the src_tree.
