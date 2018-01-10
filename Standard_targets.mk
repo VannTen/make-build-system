@@ -6,7 +6,7 @@
 #*   By: mgautier <mgautier@student.42.fr>          +#+  +:+       +#+        *#
 #*                                                +#+#+#+#+#+   +#+           *#
 #*   Created: 2017/10/31 15:04:08 by mgautier          #+#    #+#             *#
-#*   Updated: 2018/01/10 15:34:30 by mgautier         ###   ########.fr       *#
+#*   Updated: 2018/01/10 17:08:19 by mgautier         ###   ########.fr       *#
 #*                                                                            *#
 #* ************************************************************************** *#
 
@@ -32,9 +32,9 @@ re: fclean all ## Redo a clean build (unsafe with --jobs)
 
 all_test = $(test) function_test_$1
 
-check: $(call all_test,$(srcdir)) ## Perform unit tests on srcdir (current or specified on command line
+check: $(call all_test,$(srcdir)) ## Perform unit tests on $(srcdir)(current or specified on command line)
 
-check-all: $(call all_of,all_test,$(srcdir)) ## Perforn
+check-all: $(call all_of,all_test,$(srcdir)) ## Perform unit tests on $(srcdir) all its subrepos
 
 # WARNING : The 're' rules will break on a parallel build, since make will
 # attempt to do 'fclean' and 'all' at the same time, effectively building and
@@ -52,6 +52,6 @@ check-all: $(call all_of,all_test,$(srcdir)) ## Perforn
 ##  (credit for that shell command goes to Brikou Carre)
 ## https://marmelab.com/blog/2016/02/29/auto-documented-makefile.html
 help: ## Print this help
-	$(QUIET)grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST)\
+	$(QUIET)grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(makefiles_dir)/Standard_targets.mk\
 		| awk 'BEGIN {FS = ":.*?## "};\
-		{printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}'
+		{printf "\033[36m%-30s\033[0m \n%s\n", $$1, $$2}' | fold -w $$(tput cols) -s
