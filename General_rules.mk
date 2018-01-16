@@ -23,8 +23,17 @@ all_suffix = $(if $(suffix_list$1),\
 			 $(foreach suffix_,$(suffix_list$1),$1$2$(suffix_)),$1$2)
 
 # Rules to create needed directory (object, deps, etc)
-GENERATED_SUBDIRS := OBJ_DIR TEST_DIR
+GENERATED_SUBDIRS := obj_dir test_dir
+
+
+# Take a master dir and a list of macro taking a master dir as argument
+# Expand to all macros expansion concatened for the master dir and its sub
+# master dirs
+# 1 src tree
+# 2 macro list
+call_for_all_dirs = $(foreach macro, $2, $(call $(macro),$1))\
+					 $(foreach sub,$(SUBDIRS_$1),$(call $0,$1$(sub)/,$2))
 
 $(foreach dirs,$(GENERATED_SUBDIRS),\
-	$(call all_of_dir_subtree,$(srcdir),$(dirs)_)):
+	$(call call_for_all_dirs,$(srcdir),$(dirs))):
 	$(QUIET) $(MKDIR) $@
