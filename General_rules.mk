@@ -23,7 +23,7 @@ all_suffix = $(if $(suffix_list$1),\
 			 $(foreach suffix_,$(suffix_list$1),$1$2$(suffix_)),$1$2)
 
 # Rules to create needed directory (object, deps, etc)
-GENERATED_SUBDIRS := obj_dir test_dir
+GENERATED_SUBDIRS := obj_dir test_bin_dir
 
 
 # Take a master dir and a list of macro taking a master dir as argument
